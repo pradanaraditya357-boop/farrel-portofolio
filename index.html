@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farrel | 3D Interactive Portfolio</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Vanilla Tilt.js for 3D Card Effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+</head>
+<body>
+
+    <!-- 3D Particle Canvas & Matrix Rain Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="logo">FARREL<span class="logo-dot">.</span></div>
+            <nav>
+                <button class="nav-btn active" onclick="switchTab(this, 'sec-home')">Beranda</button>
+                <button class="nav-btn" onclick="switchTab(this, 'sec-about')">Tentang</button>
+                <button class="nav-btn" onclick="switchTab(this, 'sec-projects')">Karya</button>
+                <button class="nav-btn" onclick="switchTab(this, 'sec-contact')">Kontak</button>
+            </nav>
+            
+            <div class="header-controls">
+                <!-- Background Mode Toggle Button -->
+                <button class="bg-toggle-btn" id="bg-toggle-btn" title="Ganti Mode Background (Nodes/Matrix)">
+                    <i class="fa-solid fa-terminal"></i>
+                </button>
+
+                <!-- Theme Switcher Buttons -->
+                <div class="theme-switcher">
+                    <button class="theme-btn theme-cyan" onclick="setTheme('#00e5ff', '#3b82f6')" title="Electric Cyan"></button>
+                    <button class="theme-btn theme-green" onclick="setTheme('#10b981', '#06b6d4')" title="Cyber Emerald"></button>
+                    <button class="theme-btn theme-purple" onclick="setTheme('#a855f7', '#ec4899')" title="Royal Violet"></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- HOME SECTION -->
+        <section id="sec-home" class="section-view active">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1 id="typewriter-title" class="typewriter-title"></h1>
+                    <p id="typewriter-desc" class="typewriter-desc"></p>
+                    <div class="badge-container">
+                        <span class="badge"><i class="fa-solid fa-network-wired"></i> Network & Web Dev</span>
+                        
+                        <!-- Badge dengan Preview Gambar SMK Sore -->
+                        <span class="badge smk-badge-wrapper">
+                            <i class="fa-solid fa-graduation-cap"></i>&nbsp;SMK Sore Tulungagung
+                            <div class="smk-preview-popup" id="smk-popup">
+                                <img src="potosmk.jpg" alt="SMK Sore Tulungagung" class="smk-preview-img">
+                                <span class="smk-preview-caption">Lingkungan SMK Sore Tulungagung</span>
+                            </div>
+                        </span>
+
+                        <span class="badge"><i class="fa-solid fa-calendar-check"></i> Class of 2027</span>
+                        <span class="badge live-badge"><span class="live-dot"></span> Ready for Network & Web Projects</span>
+                    </div>
+                </div>
+
+                <!-- 3D Card Profile Container -->
+                <div class="portrait-wrapper card-3d" data-tilt data-tilt-max="12" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.15">
+                    <img src="fotoprofil.jpg" class="portrait-img">
+                </div>
+            </div>
+
+            <!-- Mini Terminal Concept -->
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <div class="dots-wrapper">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="terminal-title">farrel@network-node:~ (Gunakan ↑↓ untuk riwayat perintah)</span>
+                </div>
+                <div class="terminal-body">
+                    <div id="terminal-output" class="terminal-output">Ketik 'help' untuk melihat perintah interaktif ('ping', 'ipconfig', 'matrix', 'skills', 'about')...</div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">farrel@terminal:~$</span>
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="sec-about" class="section-view">
+            <h2 class="section-title">Tentang <span>Saya</span></h2>
+            <p class="section-desc">Ringkasan pengalaman & keahlian teknis.</p>
+            
+            <div class="grid-2">
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-user-graduate"></i> Latar Belakang</h3>
+                        <p>Siswa <b>Teknik Komputer dan Jaringan</b> di <b>SMK Sore Tulungagung</b> (Lulus 2027). Sangat tertarik pada dunia jaringan, administrasi server, serta web development.</p>
+                    </div>
+                </div>
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-briefcase"></i> Pengalaman PKL</h3>
+                        <p>Pernah magang di <b>CV. Trikarya Sejati</b>, berpengalaman menangani instalasi jaringan fiber optik, perbaikan koneksi Wi-Fi, serta instalasi sistem CCTV.</p>
+                    </div>
+                </div>
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-mug-hot"></i> Pengalaman Kerja</h3>
+                        <p>Pernah bekerja sebagai <b>Barista di Bonbin Public Coffeeshop</b> selama 10 bulan. Terbiasa bekerja cepat, teliti, dan melayani pelanggan secara profesional.</p>
+                    </div>
+                </div>
+                
+                <!-- Skill Proficiency Progress Bars -->
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-microchip"></i> Skills & Proficiency</h3>
+                        <div class="skill-progress-list">
+                            <div class="skill-item">
+                                <div class="skill-info"><span>Network Admin & MikroTik</span><span>90%</span></div>
+                                <div class="progress-bar-bg"><div class="progress-fill" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span>Fiber Optic / FTTH</span><span>85%</span></div>
+                                <div class="progress-bar-bg"><div class="progress-fill" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span>Cisco Packet Tracer</span><span>88%</span></div>
+                                <div class="progress-bar-bg"><div class="progress-fill" style="width: 88%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span>HTML / CSS / JS (Web Dev)</span><span>82%</span></div>
+                                <div class="progress-bar-bg"><div class="progress-fill" style="width: 82%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="sec-projects" class="section-view">
+            <h2 class="section-title">Portofolio <span>Karya</span></h2>
+            <p class="section-desc">Kumpulan proyek buatan sendiri & proyek hasil praktek lapangan.</p>
+            
+            <div class="grid-2">
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-network-wired"></i> Simulasi Jaringan Enterprise</h3>
+                        <p>Rancang bangun topologi jaringan skala menengah menggunakan Cisco Packet Tracer dan RouterOS MikroTik dengan fitur security & VLAN configuration.</p>
+                        <div class="tag-list">
+                            <span class="tag">MikroTik</span>
+                            <span class="tag">Cisco</span>
+                            <span class="tag">VLAN</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-cable"></i> Splicing & Maintenance FTTH</h3>
+                        <p>Pemasangan dan penyambungan kabel core fiber optik serta problem-solving koneksi internet pada jaringan pelanggan di CV. Trikarya Sejati.</p>
+                        <div class="tag-list">
+                            <span class="tag">Fiber Optic</span>
+                            <span class="tag">Splicing</span>
+                            <span class="tag">FTTH</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-shield-halved"></i> Cybersecurity Lab Test</h3>
+                        <p>Penguji ketahanan jaringan terhadap serangan Syn-Flood/DDoS serta penerapan rule port blocking pada perangkat router.</p>
+                        <div class="tag-list">
+                            <span class="tag">CyberSecurity</span>
+                            <span class="tag">Firewall</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-3d" data-tilt data-tilt-max="8">
+                    <div class="card-content">
+                        <h3><i class="fa-solid fa-laptop-code"></i> Modern Web Portfolio</h3>
+                        <p>Pembuatan website portofolio interaktif berbasis efek 3D tilt, kursor kustom, serta audio player untuk kebutuhan personal branding.</p>
+                        <div class="tag-list">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="sec-contact" class="section-view">
+            <h2 class="section-title">Hubungi <span>Saya</span></h2>
+            <p class="section-desc">Kirimkan pesan langsung atau terhubung melalui media sosial.</p>
+            
+            <div class="contact-container">
+                <!-- Formspree Integration -->
+                <form class="contact-form" action="https://formspree.io/f/xljglqvq" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Masukkan nama..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Anda</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="nama@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan / Diskusi</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Tuliskan pesan Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+                    </button>
+                </form>
+
+                <!-- Social Cards -->
+                <div class="contact-grid-buttons">
+                    <a href="https://wa.me/6285855265944" target="_blank" class="contact-card">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <div class="contact-card-text">
+                            <h4>WhatsApp Direct</h4>
+                            <p>Hubungi cepat via chat</p>
+                        </div>
+                    </a>
+                    <a href="mailto:pradanaradiya357@gmail.com" class="contact-card">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div class="contact-card-text">
+                            <h4>Surat Elektronik</h4>
+                            <p>pradanaraditya357@gmail.com</p>
+                        </div>
+                    </a>
+                    <a href="https://github.com/pradanaraditya357-boop" target="_blank" class="contact-card">
+                        <i class="fa-brands fa-github"></i>
+                        <div class="contact-card-text">
+                            <h4>GitHub Profile</h4>
+                            <p>Lihat proyek open source saya</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Quick Contact WhatsApp Floating Action Button -->
+    <a href="https://wa.me/6285855265944" target="_blank" class="fab-whatsapp" title="Chat langsung via WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Music Player Bar -->
+    <div class="player-bar">
+        <div class="track-info">
+            <div class="disc-icon" id="disc-icon">
+                <i class="fa-solid fa-music"></i>
+            </div>
+            <div class="track-details">
+                <h4 id="song-title">Lofi Chill Beats</h4>
+                <p id="song-artist">Playlist: Chill Study</p>
+            </div>
+        </div>
+
+        <!-- Real-time Visualizer Spectrum Bars -->
+        <div class="visualizer-spectrum" id="visualizer-spectrum">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <!-- Dropdown Playlist 12 Lagu -->
+        <div class="playlist-selector-wrapper">
+            <select id="playlist-select" class="playlist-dropdown" title="Pilih Lagu">
+                <!-- Diisi otomatis via JavaScript -->
+            </select>
+        </div>
+
+        <div class="player-controls-btns">
+            <button class="btn-icon" id="prev-btn" title="Sebelumnya"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="btn-play-main" id="main-play-btn" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
+            <button class="btn-icon" id="next-btn" title="Berikutnya"><i class="fa-solid fa-forward-step"></i></button>
+        </div>
+    </div>
+
+    <!-- Audio Progress Seekbar di atas Player Bar -->
+    <div class="player-progress-container" id="progress-container">
+        <div class="player-progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="audio-stream"></audio>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
